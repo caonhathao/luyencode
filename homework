@@ -1,0 +1,85 @@
+#include<iostream>
+#include<stack>
+#include<string>
+#include<string.h>
+#include<math.h>
+#include<sstream>
+#include<stdlib.h>
+#include<iomanip>
+
+using namespace std;
+
+int main()
+{
+	string str, s1, s2;
+	stack <char> n;
+	char d[1] = {};
+
+	//nhan phep tinh, gia su co khoang trang giua con so va dau phep tinh
+	getline(cin, str); 
+
+	// truyen vao stack n du lieu cua string s
+
+	int lenght = str.length();
+	for (int i = 0; i < lenght; i++) 
+	{
+		n.push(str[i]);
+	}
+
+	//de lay so hang dau tien thi ranh gioi nam o dau phep tinh hoac khoang trang
+	while (n.top()!='+'||n.top()!='-'||n.top()!='*'||n.top()!='/'||n.top()!= ' ') 
+	{
+		s1 = n.top();
+		n.pop();
+	}
+
+	//thuc hien lay dau phep tinh
+	if (n.top() != ' ')
+	{
+		d[0] = n.top();
+		n.pop();
+	}
+	else
+	{
+		n.pop();
+	}
+
+	//lay so hang con lai
+	while (!n.empty() && n.top() != ' ')
+	{
+		s2 = n.top();
+		n.pop();
+	}
+
+	//bien so hang o dang chuoi ve dang so tu nhien
+	double num1 = atof(s1.c_str());
+	double num2 = atof(s2.c_str());
+
+	cout << fixed << setprecision(2);
+	switch (d[0])
+	{
+	case '+': 
+	{
+		cout << num1 + num2 << endl;
+		break;
+	}
+	case '-': 
+	{
+		cout << num1 - num2 << endl;
+		break;
+	}
+	case '*': 
+	{
+		cout << num1 * num2 << endl;
+		break;
+	}
+	case '/': 
+	{
+		cout << num1 * num2 << endl;
+		break;
+	}
+	default:
+		break;
+	}
+	return 0;
+}
