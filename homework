@@ -16,18 +16,18 @@ int main()
 	char d[1] = {};
 
 	//nhan phep tinh, gia su co khoang trang giua con so va dau phep tinh
-	getline(cin, str); 
+	getline(cin, str);
 
 	// truyen vao stack n du lieu cua string s
 
 	int lenght = str.length();
-	for (int i = 0; i < lenght; i++) 
+	for (int i = 0; i < lenght; i++)
 	{
 		n.push(str[i]);
 	}
 
 	//de lay so hang dau tien thi ranh gioi nam o dau phep tinh hoac khoang trang
-	while (n.top()!='+'||n.top()!='-'||n.top()!='*'||n.top()!='/'||n.top()!= ' ') 
+	while (n.top() != '+' && n.top() != '-' && n.top() != '*' && n.top() != '/' && n.top() != ' ')
 	{
 		s1 = n.top();
 		n.pop();
@@ -58,22 +58,22 @@ int main()
 	cout << fixed << setprecision(2);
 	switch (d[0])
 	{
-	case '+': 
+	case '+':
 	{
 		cout << num1 + num2 << endl;
 		break;
 	}
-	case '-': 
+	case '-':
 	{
 		cout << num1 - num2 << endl;
 		break;
 	}
-	case '*': 
+	case '*':
 	{
 		cout << num1 * num2 << endl;
 		break;
 	}
-	case '/': 
+	case '/':
 	{
 		cout << num1 * num2 << endl;
 		break;
