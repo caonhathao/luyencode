@@ -49,16 +49,9 @@ int main() {
 			st.pop();
 		}
 		else {
-			if (st.front() < '0' || st.front() > '9')
-			{
-				isRightInput = false;
-				break;
-			}
-			else
-			{
-				str_num[n_count] += st.front();
-				st.pop();
-			}
+			str_num[n_count] += st.front();
+			st.pop();
+
 		}
 	}
 
@@ -71,8 +64,8 @@ int main() {
 		str_num[1] = sign[2] + str_num[1];
 	}
 
-	float a = atoi(str_num[0].c_str());
-	float b = atoi(str_num[1].c_str());
+	float a = atof(str_num[0].c_str());
+	float b = atof(str_num[1].c_str());
 
 	cout << fixed << setprecision(2);
 	switch (sign[1])
