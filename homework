@@ -89,7 +89,7 @@ int main() {
 	case '/':
 		if (b == 0)
 		{
-			cout << "ERROR";
+			cout << "Math Error";
 		}
 		else cout << a / b;
 		break;
