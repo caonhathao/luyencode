@@ -71,8 +71,8 @@ int main() {
 		str_num[1] = sign[2] + str_num[1];
 	}
 
-	int a = atoi(str_num[0].c_str());
-	int b = atoi(str_num[1].c_str());
+	float a = atoi(str_num[0].c_str());
+	float b = atoi(str_num[1].c_str());
 
 	cout << fixed << setprecision(2);
 	switch (sign[1])
