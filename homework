@@ -1,83 +1,98 @@
 #include<iostream>
-#include<stack>
 #include<string>
-#include<string.h>
-#include<math.h>
-#include<sstream>
-#include<stdlib.h>
+#include<cstring>
 #include<iomanip>
-
+#include<queue>
 using namespace std;
+//-1+-2
+int main() {
+	string input = ""; //enter the calculation string
+	string str_num[2] = {}; //store two number of calculation
+	queue<char>st = {}; //store the string after remove blank character
+	char sign[3] = {}; //store sign of numbers and calculation sign
 
-int main()
-{
-	string str, s1, s2;
-	stack <char> n;
-	char d[1] = {};
+	getline(cin, input);
 
-	//nhan phep tinh, gia su co khoang trang giua con so va dau phep tinh
-	getline(cin, str);
-
-	// truyen vao stack n du lieu cua string s
-
-	int lenght = str.length();
-	for (int i = 0; i < lenght; i++)
+	//loai bo toan bo khoang trong
+	for (int i = 0; i < input.size(); i++)
 	{
-		n.push(str[i]);
-	}
+		if (input[i] != ' ')
+		{
+			st.push(input[i]);
+		}
+	};
 
-	//de lay so hang dau tien thi ranh gioi nam o dau phep tinh hoac khoang trang
-	while (n.top() != '+' && n.top() != '-' && n.top() != '*' && n.top() != '/' && n.top() != ' ')
-	{
-		s1 = n.top();
-		n.pop();
-	}
+	int s_count = 0;//count serial for sign array
+	int n_count = 0;//count serial for str_num array
+	bool isRightInput = true; //if input string is include number and calculation sign only
 
-	//thuc hien lay dau phep tinh
-	if (n.top() != ' ')
-	{
-		d[0] = n.top();
-		n.pop();
+	/*this issue has 3 cases:
+1. the calculation has 3 signs, ex: -1+-2
+2. the calculation has 2 sign before, ex: -1+2
+3. the calculation has 2 digns after, ex: 1+-2*/
+	if (st.front() == '-' || st.front() == '+' || st.front() == '*' || st.front() == '/') {
+		sign[s_count] = st.front();
+		s_count++;
+		st.pop();
 	}
 	else
 	{
-		n.pop();
+		s_count++;
 	}
-
-	//lay so hang con lai
-	while (!n.empty() && n.top() != ' ')
+	while (!st.empty())
 	{
-		s2 = n.top();
-		n.pop();
+		if (st.front() == '-' || st.front() == '+' || st.front() == '*' || st.front() == '/') {
+			sign[s_count] = st.front();
+			s_count++;
+			if (n_count == 0)
+				n_count++;
+			st.pop();
+		}
+		else {
+			if (st.front() < '0' || st.front() > '9')
+			{
+				isRightInput = false;
+				break;
+			}
+			else
+			{
+				str_num[n_count] += st.front();
+				st.pop();
+			}
+		}
 	}
 
-	//bien so hang o dang chuoi ve dang so tu nhien
-	double num1 = atof(s1.c_str());
-	double num2 = atof(s2.c_str());
+	if (sign[0] != 0)
+	{
+		str_num[0] = sign[0] + str_num[0];
+	};
+	if (sign[2] != 0)
+	{
+		str_num[1] = sign[2] + str_num[1];
+	}
+
+	int a = atoi(str_num[0].c_str());
+	int b = atoi(str_num[1].c_str());
 
 	cout << fixed << setprecision(2);
-	switch (d[0])
+	switch (sign[1])
 	{
-	case '+':
-	{
-		cout << num1 + num2 << endl;
-		break;
-	}
 	case '-':
-	{
-		cout << num1 - num2 << endl;
+		cout << a - b;
 		break;
-	}
+	case '+':
+		cout << a + b;
+		break;
 	case '*':
-	{
-		cout << num1 * num2 << endl;
+		cout << a * b;
 		break;
-	}
 	case '/':
-	{
-		cout << num1 * num2 << endl;
+		if (b == 0)
+		{
+			cout << "ERROR";
+		}
+		else cout << a / b;
 		break;
-	}
 	default:
 		break;
 	}
